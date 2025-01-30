@@ -1,27 +1,24 @@
 function romanToInt(s) {
     // if the following number is bigger, current number should be subtracted from the following.
     // if the following number is smaller, simply add following numbers
-    const romanToIntMap = {
-        i: 1,
-        v: 5,
-        x: 10,
-        l: 50,
-        c: 100,
-        d: 500,
-        m: 1000
-    }
-    const sUnder = s.toLowerCase()
-
-    const indexToInt = (i) => {
-        return romanToIntMap[sUnder[i]]
+    const letterToInt = (letter) => {
+        switch (letter) {
+            case "I": return 1;
+            case "V": return 5;
+            case "X": return 10;
+            case "L": return 50;
+            case "C": return 100;
+            case "D": return 500;
+            case "M": return 1000;
+        }
     }
     let sum = 0
-    for (let i = 0; i < sUnder.length; i++) {
-        if (indexToInt(i) < indexToInt(i + 1)) {
-            sum -= indexToInt(i)
+    for (let i = 0; i < s.length; i++) {
+        if (letterToInt(s[i]) < letterToInt(s[i + 1])) {
+            sum -= letterToInt(s[i])
         }
         else {
-            sum += indexToInt(i)
+            sum += letterToInt(s[i])
         }
     }
     return sum
@@ -29,11 +26,3 @@ function romanToInt(s) {
 const s = "MCMXCIV"
 const result = romanToInt(s)
 console.log(result)
-
-// I             1
-// V             5
-// X             10
-// L             50
-// C             100
-// D             500
-// M             1000
