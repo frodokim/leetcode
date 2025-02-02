@@ -1,25 +1,18 @@
-// O(n*m)
+// original answer : O(n*m)
+// .filter creates new arrays -> extra memory useage
 
 function longestCommonPrefix(arrStr) {
-    let currentLength
-    let currentIndex
-    // find the smallest word
-    for (let i = 0; i < arrStr.length; i++) {
-        if (!currentLength || arrStr[i].length < currentLength) {
-            currentLength = arrStr[i].length
-            currentIndex = i
+    let prefix = arrStr[0]
+    let prefixLength = prefix.length
+
+    for (let i = 1; i < arrStr.length; i++) { // O(n)
+        while (prefix !== arrStr[i].substring(0, prefixLength)) { // O(m)
+            prefixLength--
+            if (prefixLength === 0) return ""
+            prefix = prefix.substring(0, prefixLength)
         }
     }
-    let smallestWord = arrStr[currentIndex]
-    arrStr.splice(currentIndex, 1)
-    while (smallestWord.length > 0) {
-        console.log("smallestWord", smallestWord)
-        console.log("arrStr", arrStr)
-        arrStr = arrStr.filter((item) => { return !item.startsWith(smallestWord) })
-        if (arrStr.length === 0) return smallestWord
-        else smallestWord = smallestWord.substring(0, smallestWord.length - 1)
-    }
-    return smallestWord
+    return prefix
 }
 
 const arrStr = ["flower", "flow", "flight"]

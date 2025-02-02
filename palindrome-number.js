@@ -11,11 +11,9 @@ function isPalindrome(x) {
     while (x > xReversed) {
         xReversed = xReversed * 10 + x % 10
         x = Math.floor(x / 10)
-        console.log(Math.floor(x), Math.floor(xReversed))
     }
     return x === xReversed || x === Math.floor(xReversed / 10)
 }
-
 
 const x = 12334
 const result = isPalindrome(x)
